@@ -12,10 +12,13 @@ using NUnit.Framework;
 public class TestClass
 {
     private static readonly string BaseUrl = Environment.GetEnvironmentVariable("Frends_ServiceNow_Url");
-    private static readonly string UserName = Environment.GetEnvironmentVariable("Frends_ServiceNow_UserName");
-    private static readonly string Password = Environment.GetEnvironmentVariable("Frends_ServiceNow_Password");
+    private static readonly string OAuthUser = "admin";
+    private static readonly string OAuthPass = Environment.GetEnvironmentVariable("Frends_ServiceNow_OAuthPass");
     private static readonly string ClientId = Environment.GetEnvironmentVariable("Frends_ServiceNow_ClientId");
     private static readonly string ClientSecret = Environment.GetEnvironmentVariable("Frends_ServiceNow_ClientSecret");
+    private static readonly string BasicUser = "integration.user";
+    private static readonly string BasicPass = Environment.GetEnvironmentVariable("Frends_ServiceNow_BasicPass");
+
     private string _accessToken;
     private Input _input;
     private Options _options;
@@ -23,7 +26,7 @@ public class TestClass
     [OneTimeSetUp]
     public async Task OnetimeSetup()
     {
-        _accessToken = await Helpers.GetAccessToken(BaseUrl, ClientId, ClientSecret, UserName, Password);
+        _accessToken = await Helpers.GetAccessToken(BaseUrl, ClientId, ClientSecret, OAuthUser, OAuthPass);
     }
 
     [SetUp]
@@ -52,8 +55,20 @@ public class TestClass
     }
 
     [Test]
-    public async Task ServiceNow_Test()
+    public async Task ServiceNow_TestOauth()
     {
+        var result = await ServiceNow.GetRecord(_input, _options, default);
+        Assert.AreEqual(200, result.StatusCode);
+        Assert.IsNotNull(result.Body);
+    }
+
+    [Test]
+    public async Task ServiceNow_TestBasic()
+    {
+        _options.Authentication = Authentication.Basic;
+        _options.Token = null;
+        _options.Username = BasicUser;
+        _options.Password = BasicPass;
         var result = await ServiceNow.GetRecord(_input, _options, default);
         Assert.AreEqual(200, result.StatusCode);
         Assert.IsNotNull(result.Body);
