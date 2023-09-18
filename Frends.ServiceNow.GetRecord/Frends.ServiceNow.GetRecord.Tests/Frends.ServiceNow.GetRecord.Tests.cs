@@ -65,6 +65,7 @@ public class TestClass
     [Test]
     public async Task ServiceNow_TestBasic()
     {
+        Console.WriteLine(BasicPass);
         _options.Authentication = Authentication.Basic;
         _options.Token = null;
         _options.Username = BasicUser;
