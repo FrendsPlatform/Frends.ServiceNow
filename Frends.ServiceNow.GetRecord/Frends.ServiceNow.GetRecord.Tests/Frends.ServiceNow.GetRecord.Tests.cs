@@ -68,7 +68,7 @@ public class TestClass
         _options.Authentication = Authentication.Basic;
         _options.Token = null;
         _options.Username = BasicUser;
-        _options.Password = "LoO$83{&2!q[<cw}AI!@txp4eP]yB^-xLWPNek{vGV-D.*zrEa4";
+        _options.Password = BasicPass;
         var result = await ServiceNow.GetRecord(_input, _options, default);
         Assert.AreEqual(200, result.StatusCode);
         Assert.IsNotNull(result.Body);
