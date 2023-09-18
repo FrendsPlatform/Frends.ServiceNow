@@ -7,6 +7,13 @@ using System.Collections.Generic;
 /// </summary>
 public class Result
 {
+    internal Result(object body, Dictionary<string, string> headers, int statusCode)
+    {
+        Body = body;
+        Headers = headers;
+        StatusCode = statusCode;
+    }
+
     /// <summary>
     /// Body of response
     /// </summary>
@@ -24,18 +31,4 @@ public class Result
     /// </summary>
     /// <example>200</example>
     public int StatusCode { get; private set; }
-
-    internal Result(string body, Dictionary<string, string> headers, int statusCode)
-    {
-        Body = body;
-        Headers = headers;
-        StatusCode = statusCode;
-    }
-
-    internal Result(object body, Dictionary<string, string> headers, int statusCode)
-    {
-        Body = body;
-        Headers = headers;
-        StatusCode = statusCode;
-    }
 }

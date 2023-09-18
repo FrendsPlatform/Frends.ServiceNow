@@ -21,8 +21,8 @@ using Frends.ServiceNow.GetRecord.Definitions;
 /// </summary>
 public static class ServiceNow
 {
-    internal static IHttpClientFactory ClientFactory = new HttpClientFactory();
-    internal static readonly ObjectCache ClientCache = MemoryCache.Default;
+    private static readonly IHttpClientFactory ClientFactory = new HttpClientFactory();
+    private static readonly ObjectCache ClientCache = MemoryCache.Default;
     private static readonly CacheItemPolicy _cachePolicy = new CacheItemPolicy() { SlidingExpiration = TimeSpan.FromHours(1) };
 
     /// <summary>
