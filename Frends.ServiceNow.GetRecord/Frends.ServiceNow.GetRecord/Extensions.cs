@@ -1,11 +1,9 @@
 ﻿namespace Frends.ServiceNow.GetRecord;
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using Frends.ServiceNow.GetRecord.Definitions;
 
-[ExcludeFromCodeCoverage]
 internal static class Extensions
 {
     internal static void SetHandlerSettingsBasedOnOptions(this HttpClientHandler handler, Options options)

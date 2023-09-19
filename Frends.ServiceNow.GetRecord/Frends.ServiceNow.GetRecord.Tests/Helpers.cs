@@ -2,19 +2,13 @@
 
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Newtonsoft.Json.Linq;
 
 internal static class Helpers
 {
     public static async Task<string> GetAccessToken(string baseUrl, string clientId, string clientSecret, string username, string password)
     {
-        var test = clientId;
-        test = clientSecret;
-        test = username;
-        test = password;
         var tokenUrl = baseUrl + "/oauth_token.do";
 
         using var client = new HttpClient();

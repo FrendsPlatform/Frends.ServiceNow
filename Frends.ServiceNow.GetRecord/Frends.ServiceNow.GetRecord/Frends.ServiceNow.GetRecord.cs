@@ -13,7 +13,6 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Runtime.Caching;
-using System.Diagnostics.CodeAnalysis;
 using Frends.ServiceNow.GetRecord.Definitions;
 
 /// <summary>
@@ -63,13 +62,6 @@ public static class ServiceNow
         }
 
         return response;
-    }
-
-    internal static void ClearClientCache()
-    {
-        var cacheKeys = ClientCache.Select(kvp => kvp.Key).ToList();
-        foreach (var cacheKey in cacheKeys)
-            ClientCache.Remove(cacheKey);
     }
 
     internal static object TryParseRequestStringResultAsJToken(string response)
@@ -128,7 +120,6 @@ public static class ServiceNow
         return httpClient;
     }
 
-    [ExcludeFromCodeCoverage]
     private static string GetHttpClientCacheKey(Options options)
     {
         // Includes everything except for options.Token, which is used on request level, not http client level
