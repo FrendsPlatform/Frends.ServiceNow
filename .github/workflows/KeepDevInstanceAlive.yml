@@ -1,0 +1,26 @@
+name: Keep Service Now Developer Instance Alive
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every day every hour
+    - cron:  '0 0 1,9,18,27 * *'
+jobs:
+  build:
+    uses: FrendsPlatform/FrendsTasks/.github/workflows/build_test.yml@main
+    with:
+      workdir: Frends.ServiceNow.GetRecord
+      env_var_name_1: Frends_ServiceNow_Url
+      env_var_name_2: Frends_ServiceNow_OAuthPass
+      env_var_name_3: Frends_ServiceNow_BasicPass
+      env_var_name_4: Frends_ServiceNow_ClientId
+      env_var_name_5: Frends_ServiceNow_ClientSecret
+    secrets:
+      badge_service_api_key: ${{ secrets.BADGE_SERVICE_API_KEY }}
+      test_feed_api_key: ${{ secrets.TASKS_TEST_FEED_API_KEY }}
+      env_var_value_1: ${{ secrets.FRENDS_SERVICENOW_URL }}
+      env_var_value_2: ${{ secrets.FRENDS_SERVICENOW_OAUTHPASS }}
+      env_var_value_3: ${{ secrets.FRENDS_SERVICENOW_BASICPASS }}
+      env_var_value_4: ${{ secrets.FRENDS_SERVICENOW_CLIENTID }}
+      env_var_value_5: ${{ secrets.FRENDS_SERVICENOW_CLIENTSECRET }}
+      

@@ -12,7 +12,7 @@ using NUnit.Framework;
 public class TestClass
 {
     private static readonly string BaseUrl = Environment.GetEnvironmentVariable("Frends_ServiceNow_Url");
-    private static readonly string OAuthUser = "admin";
+    private static readonly string OAuthUser = "oauth.user";
     private static readonly string OAuthPass = Environment.GetEnvironmentVariable("Frends_ServiceNow_OAuthPass");
     private static readonly string ClientId = Environment.GetEnvironmentVariable("Frends_ServiceNow_ClientId");
     private static readonly string ClientSecret = Environment.GetEnvironmentVariable("Frends_ServiceNow_ClientSecret");
