@@ -23,7 +23,7 @@ public static class ServiceNow
 {
     private static readonly IHttpClientFactory ClientFactory = new HttpClientFactory();
     private static readonly ObjectCache ClientCache = MemoryCache.Default;
-    private static readonly CacheItemPolicy CachePolicy = new () { SlidingExpiration = TimeSpan.FromHours(1) };
+    private static readonly CacheItemPolicy CachePolicy = new CacheItemPolicy() { SlidingExpiration = TimeSpan.FromHours(1) };
 
     /// <summary>
     /// Frends Task for creating records from ServiceNow.
