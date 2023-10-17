@@ -1,0 +1,18 @@
+name: FetchAccessToken_build_main
+
+on:
+  push:
+    branches:    
+      - main
+    paths:
+      - 'Frends.ServiceNow.FetchAccessToken/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: FrendsPlatform/FrendsTasks/.github/workflows/linux_build_main.yml@main
+    with:
+      workdir: Frends.ServiceNow.FetchAccessToken
+    secrets:
+      badge_service_api_key: ${{ secrets.BADGE_SERVICE_API_KEY }}
+      
