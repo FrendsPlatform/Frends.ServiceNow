@@ -1,0 +1,11 @@
+﻿using System.Diagnostics.CodeAnalysis;
+
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1623:Property summary documentation should match accessors", Justification = "Parameter documentation is visible to end users in Frends and needs to be written in certain way.", Scope = "namespaceanddescendants", Target = "~N:Frends.ServiceNow.DeleteRecord")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "No need to document internal constructors.", Scope = "namespaceanddescendants", Target = "~N:Frends.ServiceNow.DeleteRecord")]
+[assembly: SuppressMessage("Minor Code Smell", "S101:Types should be named in PascalCase", Justification = "Some class names should be all capitalized.", Scope = "namespaceanddescendants", Target = "~N:Frends.ServiceNow.DeleteRecord")]
+[assembly: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1503:Braces should not be omitted", Justification = "Following Frends Tasks guidelines", Scope = "namespaceanddescendants", Target = "~N:Frends.ServiceNow.DeleteRecord")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1611:Element parameters should be documented", Justification = "Following Frends Tasks guidelines", Scope = "namespaceanddescendants", Target = "~N:Frends.ServiceNow.DeleteRecord")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1629:Documentation text should end with a period", Justification = "Following Frends Tasks guidelines", Scope = "namespaceanddescendants", Target = "~N:Frends.ServiceNow.DeleteRecord")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1633:File should have header", Justification = "Following Frends Tasks guidelines", Scope = "namespaceanddescendants", Target = "~N:Frends.ServiceNow.DeleteRecord.Definitions")]
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1101:Prefix local calls with this", Justification = "Following Frends Tasks guidelines", Scope = "namespaceanddescendants", Target = "~N:Frends.ServiceNow.DeleteRecord.Definitions")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1633:File should have header", Justification = "Following Frends Tasks guidelines")]
