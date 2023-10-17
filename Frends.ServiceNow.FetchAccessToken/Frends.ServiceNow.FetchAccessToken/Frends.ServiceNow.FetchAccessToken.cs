@@ -22,13 +22,13 @@ public static class ServiceNow
     private static readonly CacheItemPolicy CachePolicy = new CacheItemPolicy() { SlidingExpiration = TimeSpan.FromHours(1) };
 
     /// <summary>
-    /// This is Task.
+    /// Frends Task for fetching access token for ServiceNow instance.
     /// [Documentation](https://tasks.frends.com/tasks/frends-tasks/Frends.ServiceNow.FetchAccessToken).
     /// </summary>
-    /// <param name="input">What to repeat.</param>
-    /// <param name="options">Define if repeated multiple times. </param>
+    /// <param name="input">Input parameters.</param>
+    /// <param name="options">Options parameters.</param>
     /// <param name="cancellationToken">Cancellation token given by Frends.</param>
-    /// <returns>Object { string Output }.</returns>
+    /// <returns>Object { dynamic Body, int StatusCode }</returns>
     public static async Task<Result> FetchAccessToken([PropertyTab] Input input, [PropertyTab] Options options, CancellationToken cancellationToken)
     {
         var httpClient = GetHttpClientForOptions(options);
