@@ -1,5 +1,5 @@
 # Frends.ServiceNow.FetchAccessToken
-Description what the Task will do.
+Frends Task for fetching access token to ServiceNow instance.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Build](https://github.com/FrendsPlatform/Frends.ServiceNow/actions/workflows/FetchAccessToken_build_and_test_on_main.yml/badge.svg)](https://github.com/FrendsPlatform/Frends.ServiceNow/actions)

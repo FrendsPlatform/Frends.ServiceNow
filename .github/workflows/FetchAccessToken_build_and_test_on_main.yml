@@ -13,6 +13,16 @@ jobs:
     uses: FrendsPlatform/FrendsTasks/.github/workflows/linux_build_main.yml@main
     with:
       workdir: Frends.ServiceNow.FetchAccessToken
+      env_var_name_1: Frends_ServiceNow_Url
+      env_var_name_2: Frends_ServiceNow_OAuthPass
+      env_var_name_3: Frends_ServiceNow_BasicPass
+      env_var_name_4: Frends_ServiceNow_ClientId
+      env_var_name_5: Frends_ServiceNow_ClientSecret
     secrets:
       badge_service_api_key: ${{ secrets.BADGE_SERVICE_API_KEY }}
+      env_var_value_1: ${{ secrets.FRENDS_SERVICENOW_URL }}
+      env_var_value_2: ${{ secrets.FRENDS_SERVICENOW_OAUTHPASS }}
+      env_var_value_3: ${{ secrets.FRENDS_SERVICENOW_BASICPASS }}
+      env_var_value_4: ${{ secrets.FRENDS_SERVICENOW_CLIENTID }}
+      env_var_value_5: ${{ secrets.FRENDS_SERVICENOW_CLIENTSECRET }}
       

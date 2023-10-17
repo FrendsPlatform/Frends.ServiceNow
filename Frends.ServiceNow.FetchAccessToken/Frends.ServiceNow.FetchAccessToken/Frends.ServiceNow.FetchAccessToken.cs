@@ -3,10 +3,7 @@
 using System.Collections.Generic;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Net;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
@@ -34,7 +31,7 @@ public static class ServiceNow
     /// <returns>Object { string Output }.</returns>
     public static async Task<Result> FetchAccessToken([PropertyTab] Input input, [PropertyTab] Options options, CancellationToken cancellationToken)
     {
-        using var httpClient = GetHttpClientForOptions(options);
+        var httpClient = GetHttpClientForOptions(options);
 
         FormUrlEncodedContent content = GetHttpContent(input);
 
@@ -45,8 +42,6 @@ public static class ServiceNow
                 cancellationToken)
             .ConfigureAwait(false);
 
-        HttpResponseMessage response = await httpClient.PostAsync($"{input.Url}/oauth_token.do", content, cancellationToken).ConfigureAwait(false);
-
         var rBody = TryParseRequestStringResultAsJToken(await responseMessage.Content
             .ReadAsStringAsync(cancellationToken)
             .ConfigureAwait(false));
@@ -54,10 +49,10 @@ public static class ServiceNow
         if (!responseMessage.IsSuccessStatusCode && options.ThrowExceptionOnErrorResponse)
         {
             throw new WebException(
-                $"Request to '{input.Url}' failed with status code {(int)responseMessage.StatusCode}. Response body: {response.Body}");
+                $"Request to '{input.Url}' failed with status code {(int)responseMessage.StatusCode}. Response body: {rBody}");
         }
 
-        return new Result(rBody, (int)response.StatusCode);
+        return new Result(rBody, (int)responseMessage.StatusCode);
     }
 
     internal static object TryParseRequestStringResultAsJToken(string response)
@@ -76,26 +71,33 @@ public static class ServiceNow
     {
         FormUrlEncodedContent content;
 
-        if (input.GrantType == GrantType.Password)
+        switch (input.GrantType)
         {
-            content = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("grant_type", input.GrantType.ToString().ToLower()),
-                new KeyValuePair<string, string>("client_id", input.ClientId),
-                new KeyValuePair<string, string>("client_secret", input.ClientSecret),
-                new KeyValuePair<string, string>("username", input.Username),
-                new KeyValuePair<string, string>("password", input.Password),
-            });
-        }
-        else
-        {
-            content = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("grant_type", input.GrantType.ToString().ToLower()),
-                new KeyValuePair<string, string>("client_id", input.ClientId),
-                new KeyValuePair<string, string>("refresh_token", input.RefreshToken),
-                new KeyValuePair<string, string>("client_secret", input.ClientSecret),
-            });
+            case GrantType.Password:
+                content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("grant_type", input.GrantType.ToString().ToLower()),
+                    new KeyValuePair<string, string>("client_id", input.ClientId),
+                    new KeyValuePair<string, string>("client_secret", input.ClientSecret),
+                    new KeyValuePair<string, string>("username", input.Username),
+                    new KeyValuePair<string, string>("password", input.Password),
+                });
+                break;
+            case GrantType.Refresh_token:
+                content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("grant_type", input.GrantType.ToString().ToLower()),
+                    new KeyValuePair<string, string>("client_id", input.ClientId),
+                    new KeyValuePair<string, string>("refresh_token", input.RefreshToken),
+                    new KeyValuePair<string, string>("client_secret", input.ClientSecret),
+                });
+                break;
+            default:
+                var properties = new List<KeyValuePair<string, string>>();
+                foreach (var property in input.Properties)
+                    properties.Add(new KeyValuePair<string, string>(property.Name, property.Value));
+                content = new FormUrlEncodedContent(properties);
+                break;
         }
 
         content.Headers.Clear();
@@ -112,7 +114,10 @@ public static class ServiceNow
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        using var request = new HttpRequestMessage(new HttpMethod("POST"), new Uri(url));
+        using var request = new HttpRequestMessage(new HttpMethod("POST"), new Uri(url))
+        {
+            Content = content,
+        };
 
         HttpResponseMessage response;
         try

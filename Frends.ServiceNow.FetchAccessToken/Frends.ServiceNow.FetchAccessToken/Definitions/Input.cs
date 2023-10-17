@@ -25,6 +25,7 @@ public class Input
     /// ServiceNow instance Client Id.
     /// </summary>
     /// <example>1ab23456c789ded785dhd</example>
+    [UIHint(nameof(GrantType), "", GrantType.Password, GrantType.Refresh_token)]
     [DisplayFormat(DataFormatString = "Text")]
     public string ClientId { get; set; }
 
@@ -32,6 +33,7 @@ public class Input
     /// ServiceNow instance Client Secret.
     /// </summary>
     /// <example>HBF78cfbe6?</example>
+    [UIHint(nameof(GrantType), "", GrantType.Password, GrantType.Refresh_token)]
     [PasswordPropertyText]
     [DisplayFormat(DataFormatString = "Text")]
     public string ClientSecret { get; set; }
@@ -61,4 +63,11 @@ public class Input
     [PasswordPropertyText]
     [DisplayFormat(DataFormatString = "Text")]
     public string RefreshToken { get; set; }
+
+    /// <summary>
+    /// Array of custome properties for the url encoded message.
+    /// </summary>
+    /// <example>[ { Name: CustomName, Value: CustomValue } ]</example>
+    [UIHint(nameof(GrantType), "", GrantType.Custom)]
+    public CustomProperty[] Properties { get; set; }
 }

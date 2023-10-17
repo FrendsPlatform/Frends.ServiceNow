@@ -14,7 +14,17 @@ public class Result
     /// <summary>
     /// Contains the access token to a certain ServiceNow instance.
     /// </summary>
-    /// <example>Example of the output.</example>
+    /// <example>
+    /// <code>
+    /// {
+    ///      "access_token": "6mq79vy2XwgVp-vnrijbn7_JKfnbiebfjnube788743fYEiNltfjeOBbDTpMru664esGGvhJJxh2uJJ4EkDnKAkaA",
+    ///      "refresh_token": "9zXaz_7cfbe7fbcvF76bvce72aAHylz-IKJDb7fhbee7bfe74Pwh77vv0tz815ptH_eFHr8zXzVA",
+    ///      "scope": "useraccount",
+    ///      "token_type": "Bearer",
+    ///      "expires_in": 1799
+    /// }
+    /// </code>
+    /// </example>
     public dynamic Body { get; private set; }
 
     /// <summary>

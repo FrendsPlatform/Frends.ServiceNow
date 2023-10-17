@@ -14,4 +14,9 @@ public enum GrantType
     /// Refresh_token grant type enables to get an access token using alive refresh token.
     /// </summary>
     Refresh_token,
+
+    /// <summary>
+    /// Custom grant type enables you to create the urlencoded message with custom keys.
+    /// </summary>
+    Custom,
 }
