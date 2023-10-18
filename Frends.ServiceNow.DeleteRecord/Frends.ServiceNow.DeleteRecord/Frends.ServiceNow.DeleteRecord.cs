@@ -38,10 +38,12 @@ public static class ServiceNow
         if (string.IsNullOrEmpty(input.Url)) throw new ArgumentNullException("Parameter Url can not be empty.");
 
         var httpClient = GetHttpClientForOptions(options);
+        var headers = GetHeaderDictionary(input.Headers, options);
 
         using var responseMessage = await GetHttpRequestResponseAsync(
                 httpClient,
                 input.Url,
+                headers,
                 cancellationToken)
             .ConfigureAwait(false);
 
@@ -66,12 +68,16 @@ public static class ServiceNow
     internal static async Task<HttpResponseMessage> GetHttpRequestResponseAsync(
             HttpClient httpClient,
             string url,
+            IDictionary<string, string> headers,
             CancellationToken cancellationToken,
             string method = "DELETE")
     {
         cancellationToken.ThrowIfCancellationRequested();
 
         using var request = new HttpRequestMessage(new HttpMethod(method), new Uri(url));
+
+        foreach (var header in headers)
+            request.Headers.TryAddWithoutValidation(header.Key, header.Value);
 
         HttpResponseMessage response;
         try
@@ -100,6 +106,27 @@ public static class ServiceNow
         {
             throw new JsonReaderException($"Unable to read response message as json: {response}");
         }
+    }
+
+    private static IDictionary<string, string> GetHeaderDictionary(Header[] headers, Options options)
+    {
+        if (!headers.Any(header => header.Name.ToLower().Equals("authorization")))
+        {
+            var authHeader = new Header { Name = "Authorization" };
+            switch (options.Authentication)
+            {
+                case Authentication.Basic:
+                    authHeader.Value = $"Basic {Convert.ToBase64String(Encoding.ASCII.GetBytes($"{options.Username}:{options.Password}"))}";
+                    headers = headers.Concat(new[] { authHeader }).ToArray();
+                    break;
+                case Authentication.OAuth:
+                    authHeader.Value = $"Bearer {options.Token}";
+                    headers = headers.Concat(new[] { authHeader }).ToArray();
+                    break;
+            }
+        }
+
+        return headers.ToDictionary(key => key.Name, value => value.Value, StringComparer.InvariantCultureIgnoreCase);
     }
 
     private static Dictionary<string, string> GetResponseHeaderDictionary(HttpResponseHeaders responseMessageHeaders, HttpContentHeaders contentHeaders)

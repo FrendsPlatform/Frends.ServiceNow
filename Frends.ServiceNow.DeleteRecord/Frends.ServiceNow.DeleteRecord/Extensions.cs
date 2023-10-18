@@ -14,4 +14,11 @@ internal static class Extensions
         if (options.AllowInvalidCertificate)
             handler.ServerCertificateCustomValidationCallback = (a, b, c, d) => true;
     }
+
+    internal static void SetDefaultRequestHeadersBasedOnOptions(this HttpClient httpClient, Options options)
+    {
+        httpClient.DefaultRequestHeaders.ExpectContinue = false;
+        httpClient.DefaultRequestHeaders.TryAddWithoutValidation("content-type", "application/json");
+        httpClient.Timeout = TimeSpan.FromSeconds(Convert.ToDouble(options.ConnectionTimeoutSeconds));
+    }
 }
