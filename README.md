@@ -6,6 +6,9 @@ Frends Tasks for ServiceNow operations.
 
 - [Frends.ServiceNow.GetRecord](Frends.ServiceNow.GetRecord/README.md)
 - [Frends.ServiceNow.CreateRecord](Frends.ServiceNow.CreateRecord/README.md)
+- [Frends.ServiceNow.FetchAccessToken](Frends.ServiceNow.FetchAccessToken/README.md)
+- [Frends.ServiceNow.DeleteRecord](Frends.ServiceNow.DeleteRecord/README.md)
+- [Frends.ServiceNow.UpdateRecord](Frends.ServiceNow.UpdateRecord/README.md)
 
 # Contributing
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
