@@ -16,7 +16,7 @@ using System.Runtime.Caching;
 using Frends.ServiceNow.GetRecord.Definitions;
 
 /// <summary>
-/// Main class of the Task. 
+/// Main class of the Task.
 /// </summary>
 public static class ServiceNow
 {

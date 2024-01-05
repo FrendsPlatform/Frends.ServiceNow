@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    uses: FrendsPlatform/FrendsTasks/.github/workflows/build_test.yml@issue-62
+    uses: FrendsPlatform/FrendsTasks/.github/workflows/linux_build_test.yml@issue-62
     with:
       workdir: Frends.ServiceNow.GetRecord
       env_var_name_1: Frends_ServiceNow_Url
