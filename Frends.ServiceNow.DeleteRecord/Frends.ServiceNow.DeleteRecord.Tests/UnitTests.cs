@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Frends.ServiceNow.DeleteRecord.Definitions;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 [TestFixture]
 internal class UnitTests
@@ -55,7 +56,7 @@ internal class UnitTests
         _input.Url = _input.Url + $"/{sys_id}";
 
         var result = await ServiceNow.DeleteRecord(_input, _options, default);
-        Assert.AreEqual(204, result.StatusCode);
+        ClassicAssert.AreEqual(204, result.StatusCode);
     }
 
     [Test]
@@ -69,6 +70,6 @@ internal class UnitTests
         _options.Password = BasicPass;
 
         var result = await ServiceNow.DeleteRecord(_input, _options, default);
-        Assert.AreEqual(204, result.StatusCode);
+        ClassicAssert.AreEqual(204, result.StatusCode);
     }
 }
