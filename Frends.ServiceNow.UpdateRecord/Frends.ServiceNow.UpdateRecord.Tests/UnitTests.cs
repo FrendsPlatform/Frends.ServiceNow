@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Frends.ServiceNow.UpdateRecord.Definitions;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 [TestFixture]
 internal class UnitTests
@@ -57,11 +58,11 @@ internal class UnitTests
         _input.Url = _input.Url + $"/{sys_id}";
 
         var result = await ServiceNow.UpdateRecord(_input, _options, default);
-        Assert.AreEqual(200, result.StatusCode);
+        ClassicAssert.AreEqual(200, result.StatusCode);
 
         var changedDescription = await Helpers.GetShortDescriptionOfRecord(_input.Url, _accessToken);
 
-        Assert.AreEqual("Changed description", changedDescription);
+        ClassicAssert.AreEqual("Changed description", changedDescription);
 
         await Helpers.DeleteCreatedRecord(_input.Url, _accessToken);
     }
@@ -78,11 +79,11 @@ internal class UnitTests
         _options.Password = BasicPass;
 
         var result = await ServiceNow.UpdateRecord(_input, _options, default);
-        Assert.AreEqual(200, result.StatusCode);
+        ClassicAssert.AreEqual(200, result.StatusCode);
 
         var changedDescription = await Helpers.GetShortDescriptionOfRecord(_input.Url, _accessToken);
 
-        Assert.AreEqual("Changed description", changedDescription);
+        ClassicAssert.AreEqual("Changed description", changedDescription);
 
         await Helpers.DeleteCreatedRecord(_input.Url, _accessToken);
     }
