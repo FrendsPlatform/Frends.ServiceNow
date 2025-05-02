@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Frends.ServiceNow.GetRecord.Definitions;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 /// <summary>
 /// Test class.
@@ -58,8 +59,8 @@ public class TestClass
     public async Task ServiceNow_TestOauth()
     {
         var result = await ServiceNow.GetRecord(_input, _options, default);
-        Assert.AreEqual(200, result.StatusCode);
-        Assert.IsNotNull(result.Body);
+        ClassicAssert.AreEqual(200, result.StatusCode);
+        ClassicAssert.IsNotNull(result.Body);
     }
 
     [Test]
@@ -70,7 +71,7 @@ public class TestClass
         _options.Username = BasicUser;
         _options.Password = BasicPass;
         var result = await ServiceNow.GetRecord(_input, _options, default);
-        Assert.AreEqual(200, result.StatusCode);
-        Assert.IsNotNull(result.Body);
+        ClassicAssert.AreEqual(200, result.StatusCode);
+        ClassicAssert.IsNotNull(result.Body);
     }
 }

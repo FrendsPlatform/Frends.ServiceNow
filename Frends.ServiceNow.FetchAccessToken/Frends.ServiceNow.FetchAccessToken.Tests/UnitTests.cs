@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Frends.ServiceNow.FetchAccessToken.Definitions;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 [TestFixture]
 internal class UnitTests
@@ -44,8 +45,8 @@ internal class UnitTests
     public async Task ServiceNow_TestPasswordGrantType()
     {
         var result = await ServiceNow.FetchAccessToken(_input, _options, default);
-        Assert.AreEqual(200, result.StatusCode);
-        Assert.IsNotNull(result.Body.access_token);
+        ClassicAssert.AreEqual(200, result.StatusCode);
+        ClassicAssert.IsNotNull(result.Body.access_token);
     }
 
     [Test]
@@ -58,8 +59,8 @@ internal class UnitTests
         _input.Password = null;
         _input.RefreshToken = refreshToken;
         result = await ServiceNow.FetchAccessToken(_input, _options, default);
-        Assert.AreEqual(200, result.StatusCode);
-        Assert.IsNotNull(result.Body.access_token);
+        ClassicAssert.AreEqual(200, result.StatusCode);
+        ClassicAssert.IsNotNull(result.Body.access_token);
     }
 
     [Test]
@@ -80,8 +81,8 @@ internal class UnitTests
         };
 
         var result = await ServiceNow.FetchAccessToken(input, _options, default);
-        Assert.AreEqual(200, result.StatusCode);
-        Assert.IsNotNull(result.Body.access_token);
+        ClassicAssert.AreEqual(200, result.StatusCode);
+        ClassicAssert.IsNotNull(result.Body.access_token);
 
         input.Properties = new CustomProperty[]
         {
@@ -92,7 +93,7 @@ internal class UnitTests
         };
 
         result = await ServiceNow.FetchAccessToken(input, _options, default);
-        Assert.AreEqual(200, result.StatusCode);
-        Assert.IsNotNull(result.Body.access_token);
+        ClassicAssert.AreEqual(200, result.StatusCode);
+        ClassicAssert.IsNotNull(result.Body.access_token);
     }
 }

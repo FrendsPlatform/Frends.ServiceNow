@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Frends.ServiceNow.CreateRecord.Definitions;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 [TestFixture]
 internal class UnitTests
@@ -54,8 +55,8 @@ internal class UnitTests
     public async Task ServiceNow_TestOauth()
     {
         var result = await ServiceNow.CreateRecord(_input, _options, default);
-        Assert.AreEqual(201, result.StatusCode);
-        Assert.IsNotNull(result.Body);
+        ClassicAssert.AreEqual(201, result.StatusCode);
+        ClassicAssert.IsNotNull(result.Body);
 
         await Helpers.DeleteCreatedRecord($"{_input.Url}/{result.Body.result.sys_id}", _accessToken);
     }
@@ -68,8 +69,8 @@ internal class UnitTests
         _options.Username = BasicUser;
         _options.Password = BasicPass;
         var result = await ServiceNow.CreateRecord(_input, _options, default);
-        Assert.AreEqual(201, result.StatusCode);
-        Assert.IsNotNull(result.Body);
+        ClassicAssert.AreEqual(201, result.StatusCode);
+        ClassicAssert.IsNotNull(result.Body);
 
         await Helpers.DeleteCreatedRecord($"{_input.Url}/{result.Body.result.sys_id}", _accessToken);
     }
@@ -78,8 +79,8 @@ internal class UnitTests
     public async Task ServiceNow_TestCreateWithJson()
     {
         var result = await ServiceNow.CreateRecord(_input, _options, default);
-        Assert.AreEqual(201, result.StatusCode);
-        Assert.IsNotNull(result.Body);
+        ClassicAssert.AreEqual(201, result.StatusCode);
+        ClassicAssert.IsNotNull(result.Body);
 
         await Helpers.DeleteCreatedRecord($"{_input.Url}/{result.Body.result.sys_id}", _accessToken);
     }
@@ -100,8 +101,8 @@ internal class UnitTests
                 new Header { Name = "Content-Type", Value = "application/xml" },
             };
         var result = await ServiceNow.CreateRecord(_input, _options, default);
-        Assert.AreEqual(201, result.StatusCode);
-        Assert.IsNotNull(result.Body);
+        ClassicAssert.AreEqual(201, result.StatusCode);
+        ClassicAssert.IsNotNull(result.Body);
 
         await Helpers.DeleteCreatedRecord($"{_input.Url}/{result.Body.result.sys_id}", _accessToken);
     }
